@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Problem1
+namespace Problem001
 {
     /// <summary>
     /// If we list all the natural numbers below 10 that are multiples of 3 or 

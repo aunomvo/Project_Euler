@@ -8,8 +8,8 @@
     <ProjectGuid>{654F65FF-858F-4B21-A066-34CBA278D572}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Problem1</RootNamespace>
-    <AssemblyName>Problem1</AssemblyName>
+    <RootNamespace>Problem001</RootNamespace>
+    <AssemblyName>Problem001</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
