@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace Problem001
 {
@@ -14,12 +12,14 @@ namespace Problem001
     /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var stopwatch = new Stopwatch();
+
             stopwatch.Start();
-            var result = Enumerable.Range(1, 999).Where(x => x%3 == 0 || x%5 == 0).Sum(x => x);
+            var result = Enumerable.Range(1, 999).Where(x => x%3 == 0 || x%5 == 0).Sum();
             stopwatch.Stop();
+
             Console.WriteLine(string.Format("The result is {0}.", result));
             Console.WriteLine(string.Format("The calculation took {0} ms.", stopwatch.ElapsedMilliseconds));
             Console.WriteLine(string.Empty);
