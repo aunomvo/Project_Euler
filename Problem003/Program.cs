@@ -32,51 +32,14 @@ namespace Problem003
 
         private static int SolveProblem()
         {
-            var result = CompositeNum;
-
-            var primes = new List<int>{2};
-
-            while(true)
+            var temp = CompositeNum;
+            for(ulong i = 3; i * i < temp; i += 2)
             {
-                if (primes.Contains((int)result))
-                    return (int) result;
-                else
-                {
-                    var foundDivisor = false;
-                    foreach(var prime in primes)
-                    {
-                        if (result % (ulong) prime == 0)
-                        {
-                            result = result/(ulong) prime;
-                            foundDivisor = true;
-                            break;
-                        }
-                    }
+                if (temp % i == 0)
+                    temp /= i;
+            }
 
-                    if(!foundDivisor)
-                        GetMorePrimes(primes);
-                }
-            }
-        }
-
-        private static void GetMorePrimes(List<int> primes)
-        {
-            var maxPrime = primes.Max();
-            var newPrimes = new List<int>();
-            var range = Enumerable.Range(2, maxPrime * maxPrime * maxPrime * maxPrime);
-            var cursor = 2;
-            while (cursor * cursor < (maxPrime * maxPrime * maxPrime * maxPrime))
-            {
-                newPrimes.Add(cursor);
-                int cursor1 = cursor;
-                range = range.Where(x => x%cursor1 != 0);
-                cursor = range.Min();
-            }
-            foreach(var p in newPrimes)
-            {
-                if (!primes.Contains(p))
-                    primes.Add(p);
-            }
+            return (int) temp;
         }
     }
 }
