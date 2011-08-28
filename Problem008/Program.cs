@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -76,7 +75,7 @@ namespace Problem008
                     .Substring(i, 5)
                     .ToCharArray()
                     .Select(x => x.ToString())
-                    .Select(x => int.Parse(x))
+                    .Select(int.Parse)
                     .Aggregate((workingProduct, next) => workingProduct*next);
                 if (product > maxProduct)
                     maxProduct = product;
