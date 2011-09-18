@@ -35,6 +35,16 @@ namespace Problem009
 
         private static int SolveProblem()
         {
+            for(var c = 997; c > 333; c--)
+            {
+                for(var b = 999 - c; b > 1; b--)
+                {
+                    var a = 1000 - (b + c);
+                    if (a * a + b * b == c * c)
+                        return a*b*c;
+                }
+            }
+            return 0;
         }
     }
 }
