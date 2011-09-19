@@ -73,7 +73,13 @@ namespace Problem011
 
         private static int SolveProblem()
         {
-            var data = InputData.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray()).ToArray();
+            var data = InputData
+                .Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => x
+                    .Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse)
+                    .ToArray())
+                .ToArray();
 
             var retval = 0;
 
