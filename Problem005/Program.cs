@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Problem005
 {
@@ -10,14 +11,14 @@ namespace Problem005
     /// What is the smallest positive number that is evenly divisible by all of
     /// the numbers from 1 to 20?
     /// </summary>
-    class Program
+    static class Program
     {
         static void Main()
         {
             var stopwatch = new Stopwatch();
 
             stopwatch.Start();
-            var result = SolveProblem();
+            var result = SolveProblem(20);
             stopwatch.Stop();
 
             Console.WriteLine(string.Format("The result is {0}.", result));
@@ -27,10 +28,26 @@ namespace Problem005
             Console.ReadKey(true);
         }
 
-        private static int SolveProblem()
+        internal static int SolveProblem(int max)
         {
             //from primes and perfect power numbers (e.g. x^n) in the range of 1 to 20
             return 2*2*2*2*3*3*5*7*11*13*17*19;
+        }
+    }
+
+    [TestClass]
+    public class TestProblem001
+    {
+        [TestMethod]
+        public void TestSolveProblemEasy()
+        {
+            Assert.AreEqual(2520, Program.SolveProblem(10));
+        }
+
+        [TestMethod]
+        public void TestSolveProblemFull()
+        {
+            Assert.AreEqual(232792560, Program.SolveProblem(20));
         }
     }
 }

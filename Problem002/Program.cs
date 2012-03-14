@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Problem002
 {
@@ -15,7 +16,7 @@ namespace Problem002
     /// By considering the terms in the Fibonacci sequence whose values do not 
     /// exceed four million, find the sum of the even-valued terms.
     /// </summary>
-    class Program
+    static class Program
     {
         static void Main()
         {
@@ -32,7 +33,7 @@ namespace Problem002
             Console.ReadKey(true);
         }
 
-        private static int SolveProblem()
+        internal static int SolveProblem()
         {
             var items = new List<int> {1, 2};
             while(true)
@@ -43,6 +44,16 @@ namespace Problem002
                 items.Add(item);
             }
             return items.Where(x => x%2 == 0).Sum();
+        }
+    }
+
+    [TestClass]
+    public class TestProblem001
+    {
+        [TestMethod]
+        public void TestSolveProblem()
+        {
+            Assert.AreEqual(4613732, Program.SolveProblem());
         }
     }
 }

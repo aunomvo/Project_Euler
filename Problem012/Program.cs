@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 namespace Problem012
 {
@@ -43,32 +46,47 @@ namespace Problem012
 
         private static int SolveProblem()
         {
-            var loopCounter = 0;
-            var retval = 0;
-            while(true)
+            var triangleNum = 1;
+            for (int i = 2; DivisorCount(triangleNum) <= 500; i++)
             {
-                loopCounter++;
-                retval += loopCounter;
-                var divCount = DivisorCount(retval);
-                if (divCount > 500)
-                    break;
-                Console.WriteLine("{0}:{1}", retval, divCount);
+                triangleNum += i;
+            }
+
+            return triangleNum;
+        }
+
+        private static int DivisorCount(int num)
+        {
+            PopulatePrimes(num);
+            var retval = 1;
+
+            var primeFactors = s_Primes.Where(x => x < num && num % x == 0).ToList();
+
+            foreach (var factor in primeFactors)
+            {
+                int i;
+                for (i = 1; num % Math.Pow(factor, i) == 0; i++)
+                    ;
+                retval *= i;
             }
 
             return retval;
         }
 
-        private static int DivisorCount(int num)
+        private static List<int> s_Primes = new List<int>();
+        
+        private static void PopulatePrimes(int upTo)
         {
-            var retval = 2;
-            for (var i = 2; i < num; i++)
-            {
-                if (num % i == 0)
-                {
-                    retval++;
-                }
-            }
-            return retval;
+            if(upTo <= s_Primes.DefaultIfEmpty().Max())
+                return;
+            var bitArray = new BitArray(upTo*100);
+            bitArray[0] = false;
+            bitArray[1] = false;
+            for (var i = 2; i < bitArray.Length; i++)
+                if (bitArray[i])
+                    for (var j = i * 2; j < bitArray.Length; j += i)
+                        bitArray[j] = false;
+            s_Primes = bitArray.Cast<bool>().Select((x, y) => new { x, y }).Where(x => x.x).Select(x => x.y).ToList();
         }
     }
 }

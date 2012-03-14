@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Problem004
 {
@@ -10,14 +11,14 @@ namespace Problem004
     ///
     /// Find the largest palindrome made from the product of two 3-digit numbers
     /// </summary>
-    class Program
+    static class Program
     {
         static void Main()
         {
             var stopwatch = new Stopwatch();
 
             stopwatch.Start();
-            var result = SolveProblem();
+            var result = SolveProblem(3);
             stopwatch.Stop();
 
             Console.WriteLine(string.Format("The result is {0}.", result));
@@ -27,13 +28,27 @@ namespace Problem004
             Console.ReadKey(true);
         }
 
-        private static int SolveProblem()
+        internal static int SolveProblem(int digits)
         {
             var result = 0;
 
-            for(var x = 999; x > 99; x--)
+            var max = 9;
+            for (var i = 1; i < digits; i++ )
             {
-                for (var y = 999; y > 99; y--)
+                max *= 10;
+                max += 9;
+            }
+
+            var min = 9;
+            for (var i = 1; i < digits - 1; i++)
+            {
+                min *= 10;
+                min += 9;
+            }
+
+            for (var x = max; x > min; x--)
+            {
+                for (var y = max; y > min; y--)
                 {
                     var temp = x * y;
                     var tempstr = temp.ToString();
@@ -45,6 +60,22 @@ namespace Problem004
             }
 
             return result;
+        }
+    }
+
+    [TestClass]
+    public class TestProblem001
+    {
+        [TestMethod]
+        public void TestSolveProblemEasy()
+        {
+            Assert.AreEqual(9009, Program.SolveProblem(2));
+        }
+
+        [TestMethod]
+        public void TestSolveProblemFull()
+        {
+            Assert.AreEqual(906609, Program.SolveProblem(3));
         }
     }
 }

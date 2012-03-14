@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Problem003
 {
@@ -8,16 +9,16 @@ namespace Problem003
     ///
     /// What is the largest prime factor of the number 600851475143 ?
     /// </summary>
-    class Program
+    static class Program
     {
-        private const ulong CompositeNum = 600851475143;
+        internal const ulong CompositeNum = 600851475143;
 
         static void Main()
         {
             var stopwatch = new Stopwatch();
 
             stopwatch.Start();
-            var result = SolveProblem();
+            var result = SolveProblem(CompositeNum);
             stopwatch.Stop();
 
             Console.WriteLine(string.Format("The result is {0}.", result));
@@ -27,9 +28,9 @@ namespace Problem003
             Console.ReadKey(true);
         }
 
-        private static int SolveProblem()
+        internal static int SolveProblem(ulong compositeNum)
         {
-            var temp = CompositeNum;
+            var temp = compositeNum;
             for(ulong i = 3; i * i < temp; i += 2)
             {
                 if (temp % i == 0)
@@ -37,6 +38,22 @@ namespace Problem003
             }
 
             return (int) temp;
+        }
+    }
+
+    [TestClass]
+    public class TestProblem001
+    {
+        [TestMethod]
+        public void TestSolveProblemEasy()
+        {
+            Assert.AreEqual(29, Program.SolveProblem(13195));
+        }
+
+        [TestMethod]
+        public void TestSolveProblemFull()
+        {
+            Assert.AreEqual(6857, Program.SolveProblem(Program.CompositeNum));
         }
     }
 }
