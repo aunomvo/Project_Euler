@@ -1,5 +1,10 @@
 bin/
+
 obj/
+
 *.user
+
 *.suo
+
 _ReSharper.*
+*.cache
